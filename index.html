@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Er. Harshvardhan Purohit – Portfolio</title>
+  <meta name="description" content="Cinematic, animated portfolio of Er. Harshvardhan Purohit – Founder & CEO, SIN Education & Technology Pvt. Ltd." />
+  <style>
+    /* =====================
+       RESET & BASE
+    ====================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      /* Dark theme (default) */
+      --bg: #0a0a0f;
+      --bg-2: #0f0f14;
+      --text: #eef0f5;
+      --muted: #b7bac7;
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.12);
+      --accent: #8b1c2e; /* Maroon */
+      --accent-2: #f59e0b; /* Amber */
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --ring: 0 0 0 2px rgba(139,28,46,0.5);
+    }
+    [data-theme="light"] {
+      --bg: #fafafc;
+      --bg-2: #ffffff;
+      --text: #0b0b10;
+      --muted: #4b4f5e;
+      --card: rgba(0,0,0,0.04);
+      --border: rgba(0,0,0,0.08);
+      --accent: #8b1c2e;
+      --accent-2: #c2410c;
+      --shadow: 0 12px 28px rgba(0,0,0,0.12);
+      --ring: 0 0 0 2px rgba(139,28,46,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text); background: radial-gradient(80% 60% at 20% 5%, rgba(139,28,46,0.15), transparent 60%),
+               radial-gradient(60% 50% at 80% 0%, rgba(59,130,246,0.14), transparent 65%),
+               linear-gradient(180deg, var(--bg), var(--bg-2));
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+
+    /* =====================
+       NAVBAR
+    ====================== */
+    .nav-wrap {
+      position: sticky; top: 14px; z-index: 50;
+    }
+    .nav {
+      display: flex; align-items: center; gap: 10px; justify-content: center;
+      padding: 10px; border-radius: 999px;
+      background: color-mix(in oklab, var(--bg-2) 70%, transparent);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .nav a {
+      font-size: 14px; padding: 8px 14px; border-radius: 999px; color: color-mix(in oklab, var(--text), #ffffff 5%);
+    }
+    .nav a:hover { background: var(--card); }
+    .nav .cta { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; box-shadow: 0 6px 18px rgba(139,28,46,0.4); }
+    .nav .cta:hover { transform: translateY(-1px); }
+
+    .theme-toggle {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      border-radius: 999px; padding: 8px 12px; border: 1px solid var(--border); background: var(--card);
+    }
+
+    /* =====================
+       HERO
+    ====================== */
+    .hero {
+      position: relative; min-height: 88vh; display: grid; place-items: center; overflow: clip;
+    }
+    .hero .bg-glow {
+      position: absolute; inset: -20%;
+      background:
+        radial-gradient(40% 40% at 70% 10%, rgba(245,158,11,0.24), transparent 60%),
+        radial-gradient(40% 40% at 20% 10%, rgba(139,28,46,0.35), transparent 65%),
+        radial-gradient(60% 60% at 50% 90%, rgba(59,130,246,0.18), transparent 65%);
+      filter: blur(40px);
+      animation: floatGlow 18s ease-in-out infinite alternate;
+    }
+    @keyframes floatGlow { from { transform: translateY(-2%) } to { transform: translateY(2%) } }
+
+    .hero-inner { position: relative; z-index: 1; padding: 80px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .badge { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); display:inline-flex; align-items:center; gap:8px }
+    .badge::before { content: "✦"; color: #f3b76b; }
+
+    .title { font-size: clamp(40px, 7vw, 84px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+    .title .grad { background: linear-gradient(90deg, #f0c7c7, #ffd7a9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: var(--muted); max-width: 760px; font-size: clamp(16px, 2.2vw, 20px); }
+
+    .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-top: 16px; }
+    .btn { padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 600; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; border: 0; box-shadow: 0 10px 24px rgba(139,28,46,0.35); }
+
+    /* Orbiting cinematic rings */
+    .rings { position: absolute; inset: 0; pointer-events: none; }
+    .ring { position: absolute; border-radius: 999px; border: 1px dashed color-mix(in oklab, var(--text) 30%, transparent); inset: 12% 8% 30% 8%; filter: drop-shadow(0 0 8px rgba(255,255,255,0.05)); }
+    .ring::after { content: ""; position: absolute; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #ffbfbf 40%, rgba(255,255,255,0) 70%); box-shadow: 0 0 24px rgba(255,200,200,0.6); top: -6px; left: 50%; transform-origin: -200px 200px; animation: orbit 18s linear infinite; }
+    .ring.r2 { inset: 18% 14% 20% 14%; opacity: 0.5; }
+    .ring.r2::after { animation-duration: 26s; }
+    .ring.r3 { inset: 26% 22% 12% 22%; opacity: 0.35; }
+    .ring.r3::after { animation-duration: 34s; }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    /* =====================
+       SECTIONS
+    ====================== */
+    section { padding: 80px 0; position: relative; }
+    .section-head { margin-bottom: 26px; }
+    .h2 { font-size: clamp(28px, 4.8vw, 48px); line-height: 1.1; margin: 0 0 8px; }
+    .sub { color: var(--muted); max-width: 800px; }
+
+    /* Cards Grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .card { background: color-mix(in oklab, var(--bg-2) 90%, var(--card)); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); transform-style: preserve-3d; transition: transform .25s ease, background .3s ease, border-color .3s ease; }
+    .card:hover { transform: translateY(-4px) rotateX(1.2deg) rotateY(-1.2deg); border-color: color-mix(in oklab, var(--accent) 40%, var(--border)); }
+    .card .tag { display:inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); margin-right:6px; margin-top:8px; color: var(--muted); }
+
+    /* Timeline */
+    .timeline { position: relative; margin-left: 10px; padding-left: 24px; border-left: 2px dashed var(--border); }
+    .milestone { margin-bottom: 18px; position: relative; }
+    .milestone::before { content: ""; position: absolute; left: -9px; top: 6px; width: 14px; height: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 50%; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 20%, transparent); }
+    .year { font-weight: 800; color: color-mix(in oklab, var(--text) 85%, #fff 10%); }
+    .m-title { font-weight: 700; }
+    .m-body { color: var(--muted); }
+
+    /* Media */
+    .media-card { overflow: hidden; position: relative; }
+    .media-thumb { aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(180deg, #111, #333); border: 1px solid var(--border); display:grid; place-items:center; color:#fff; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .play { position: absolute; inset: 0; display:grid; place-items:center; pointer-events:none; }
+    .play span { width: 84px; height:84px; border-radius: 999px; background: radial-gradient(circle at 35% 35%, #fff, #ffd7a9 40%, rgba(255,255,255,0) 70%); filter: blur(0.2px); opacity: .75; }
+
+    /* Contact */
+    .contact { display:grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-2); color: var(--text); }
+    .input:focus { outline: none; box-shadow: var(--ring); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 28px 0 54px; color: var(--muted); }
+
+    /* =====================
+       ANIMATIONS (Reveal)
+    ====================== */
+    .reveal { opacity: 0; transform: translateY(18px) scale(.98); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Floating Particles */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .particle { position: absolute; width: 8px; height: 8px; border-radius: 50%; filter: blur(1px); opacity: .25; background: #fff; animation: drift linear infinite; }
+    @keyframes drift { to { transform: translate3d(var(--tx), var(--ty), 0) scale(1.1); opacity: .15; } }
+
+    /* Responsive helpers */
+    .row { display:flex; gap:18px; flex-wrap:wrap; align-items:center; }
+  </style>
+</head>
+<body>
+  <!-- Particles Layer -->
+  <div class="particles" aria-hidden="true" id="particles"></div>
+
+  <!-- NAVBAR -->
+  <div class="nav-wrap container">
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#ventures">Ventures</a>
+      <a href="#programs">Programs</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#media">Talks & Media</a>
+      <a href="#contact" class="cta">Work with Me</a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M6.34 17.66l1.41-1.41M15.66 7.76l1.41-1.41"/></svg>
+        <svg id="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="themeLabel">Auto</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="rings" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+    </div>
+    <div class="hero-inner container">
+      <div class="badge-row reveal">
+        <span class="badge">Founder & CEO · SIN Education & Technology</span>
+        <span class="badge">Director · SIN School of AI</span>
+        <span class="badge">AI/ML Professional</span>
+      </div>
+      <h1 class="title reveal" style="--d:0.1s">Er. Harshvardhan <span class="grad">Purohit</span></h1>
+      <p class="lead reveal" style="--d:0.2s">
+        We build cinematic brands and practical AI education. From VR experiences to enterprise dashboards—
+        crafting systems that save time and scale impact.
+      </p>
+      <div class="hero-cta reveal" style="--d:0.3s">
+        <a class="btn primary" href="#contact">Start a Project →</a>
+        <a class="btn" href="#programs">Explore Programs</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">About</h2>
+      <p class="sub reveal">Founder & CEO of SIN Education & Technology Pvt. Ltd. (est. 2024). Building multi‑vertical AI operations across education, branding, data, and R&D. Gold Medalist – B.Tech AI & ML (BTU Convocation 2025). Collaborations with leading institutions and innovation centers.</p>
+    </div>
+    <div class="row">
+      <div class="card reveal" style="flex:1 1 380px">
+        <h3>Focus</h3>
+        <p>Generative AI education, brand systems, data intelligence, and immersive tech pilots.</p>
+        <div>
+          <span class="tag">EdTech</span>
+          <span class="tag">Branding</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">AR/VR</span>
+        </div>
+      </div>
+      <div class="card reveal" style="flex:1 1 380px">
+        <h3>Highlights</h3>
+        <ul>
+          <li>Best Startup of the Year – JIET Group</li>
+          <li>Top 25 at PedalStart</li>
+          <li>ISO 9001:2015 · IAF · EGAC</li>
+          <li>Innovation Centers & Hackathons</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENTURES -->
+  <section id="ventures" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">Ventures</h2>
+      <p class="sub reveal">A connected ecosystem that delivers learning, identity, data, and experiences.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal"><h3>SIN Education & Technology Pvt. Ltd.</h3><p>AI‑first ecosystem: education, branding, data, and immersive tech under one roof.</p><div><span class="tag">AI</span><span class="tag">R&D</span><span class="tag">Consulting</span></div></article>
+      <article class="card reveal"><h3>SIN School of AI</h3><p>Certified programs, workshops, and bootcamps that turn learners into AI practitioners.</p><div><span class="tag">Generative AI</span><span class="tag">Upskilling</span></div></article>
+      <article class="card reveal"><h3>SIN Brand Studio</h3><p>Cinematic branding, packaging, and campaign systems powered by AI workflows.</p><div><span class="tag">Branding</span><span class="tag">Design</span></div></article>
+      <article class="card reveal"><h3>SIN Data Studio</h3><p>Dashboards, analytics, and decision intelligence for schools and enterprises.</p><div><span class="tag">BI</span><span class="tag">Automation</span></div></article>
+      <article class="card reveal"><h3>SIN Innovation Centers</h3><p>On‑campus labs (e.g., St. Austin’s, Jodhpur) for hackathons, VR demos, and incubation.</p><div><span class="tag">Innovation</span><span class="tag">Community</span></div></article>
+      <article class="card reveal"><h3>101 Universe</h3><p>A cinematic “course‑verse”: Branding 101, Generative AI 101, No‑Code Web Dev 101, and more.</p><div><span class="tag">Courses</span><span class="tag">Cinematic</span></div></article>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">Programs</h2>
+      <p class="sub reveal">Practical, portfolio‑first learning with frameworks, projects, and certification.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal">
+        <h3>Generative AI for Leaders & Innovators</h3>
+        <p>9‑Day Intensive: prompt engineering, responsible AI, and hands‑on with Hugging Face, Cursor AI, Google AI Studio. Build & host AI apps.</p>
+        <a class="btn" href="https://www.sintechnologies.in/preregistration" target="_blank" rel="noopener">Enroll →</a>
+      </article>
+      <article class="card reveal">
+        <h3>AI Agents in Business: 30‑Day Bootcamp</h3>
+        <p>Agent workflows, ops automation, and real client use‑cases. 70% practical.</p>
+        <a class="btn" href="#">Notify Me →</a>
+      </article>
+      <article class="card reveal">
+        <h3>Branding 101: Master Branding with Generative AI</h3>
+        <p>Brand systems, visual identity, and AI content pipelines for modern businesses.</p>
+        <a class="btn" href="#">Explore →</a>
+      </article>
+      <article class="card reveal">
+        <h3>No‑Code Web Development with Generative AI</h3>
+        <p>Framer/Wix/Notion, Bolt/Claude, Firebase/Make. Project‑first learning.</p>
+        <a class="btn" href="#">Syllabus →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section id="milestones" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">Milestones</h2>
+      <p class="sub reveal">A quick timeline of recent achievements and growth.</p>
+    </div>
+    <div class="timeline">
+      <div class="milestone reveal">
+        <div class="year">2025</div>
+        <div class="m-title">Gold Medalist, B.Tech AI & ML (BTU Convocation)</div>
+        <div class="m-body">Recognized for academic excellence while scaling SIN’s AI programs.</div>
+      </div>
+      <div class="milestone reveal">
+        <div class="year">2024</div>
+        <div class="m-title">Founded SIN Education & Technology Pvt. Ltd.</div>
+        <div class="m-body">Established multi‑vertical operations across education, branding, data, and R&D.</div>
+      </div>
+      <div class="milestone reveal">
+        <div class="year">2024</div>
+        <div class="m-title">Launched SIN Innovation Centers</div>
+        <div class="m-body">Hands‑on AI/VR labs and hackathons in schools; activated community events.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section id="media" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">Talks & Media</h2>
+      <p class="sub reveal">Podcasts, sessions, and community events.</p>
+    </div>
+    <div class="grid">
+      <article class="card media-card reveal">
+        <div class="media-thumb">AI Unwired — Audiversitty</div>
+        <div class="play"><span></span></div>
+      </article>
+      <article class="card media-card reveal">
+        <div class="media-thumb">Visionaries Legacy — Recap</div>
+        <div class="play"><span></span></div>
+      </article>
+      <article class="card media-card reveal">
+        <div class="media-thumb">Genesis Hackathon — Highlights</div>
+        <div class="play"><span></span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <div class="section-head">
+      <h2 class="h2 reveal">Contact</h2>
+      <p class="sub reveal">Let’s build something cinematic and useful. For quick queries: <a href="mailto:ceo@sintechnologies.in">ceo@sintechnologies.in</a></p>
+    </div>
+    <div class="contact">
+      <form class="card reveal" onsubmit="event.preventDefault(); alert('Thanks! I\'ll get back to you.');">
+        <label>
+          <span>Name</span>
+          <input class="input" type="text" placeholder="Your name" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input class="input" type="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea class="input" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </label>
+        <button class="btn primary" type="submit">Send Message →</button>
+      </form>
+      <div class="card reveal">
+        <h3>Links</h3>
+        <p><a href="https://in.linkedin.com/in/harshvardhan1609" target="_blank" rel="noopener">LinkedIn</a></p>
+        <p><a href="https://www.youtube.com/channel/UCz2S-k7FvP9-enElvVUTg8w" target="_blank" rel="noopener">YouTube</a></p>
+        <p><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
+        <p><a href="https://www.sintechnologies.in" target="_blank" rel="noopener">Website</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <div>© <span id="yr"></span> Er. Harshvardhan Purohit • SIN Education & Technology Pvt. Ltd.</div>
+  </footer>
+
+  <script>
+    // ==========================
+    // THEME: Auto / Light / Dark
+    // ==========================
+    (function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const html = document.documentElement;
+      if (saved === 'light' || saved === 'dark') html.setAttribute('data-theme', saved);
+      else html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      updateThemeLabel();
+    })();
+
+    function updateThemeLabel(){
+      const mode = document.documentElement.getAttribute('data-theme');
+      const label = document.getElementById('themeLabel');
+      const sun = document.getElementById('icon-sun');
+      const moon = document.getElementById('icon-moon');
+      if(mode === 'dark') { label.textContent = 'Dark'; sun.style.display = 'none'; moon.style.display = 'inline'; }
+      else if(mode === 'light') { label.textContent = 'Light'; sun.style.display = 'inline'; moon.style.display = 'none'; }
+      else { label.textContent = 'Auto'; }
+    }
+
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      let next = 'light';
+      if(current === 'light') next = 'dark';
+      else if(current === 'dark') next = 'auto';
+      else next = 'light';
+      if(next === 'auto') localStorage.removeItem('theme');
+      else localStorage.setItem('theme', next);
+      if(next === 'auto') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      } else html.setAttribute('data-theme', next);
+      updateThemeLabel();
+    });
+
+    // ================
+    // Reveal on scroll
+    // ================
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      })
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ======================
+    // Floating Particles gen
+    // ======================
+    const particleRoot = document.getElementById('particles');
+    const W = () => window.innerWidth; const H = () => window.innerHeight;
+    const N = Math.min(28, Math.floor((W()*H())/35000));
+    for(let i=0;i<N;i++){
+      const p = document.createElement('span');
+      p.className = 'particle reveal';
+      const x = Math.random()*W(); const y = Math.random()*H();
+      const tx = (Math.random()*120-60)+'px';
+      const ty = (Math.random()*120-60)+'px';
+      p.style.left = x+'px'; p.style.top = y+'px';
+      p.style.setProperty('--tx', tx); p.style.setProperty('--ty', ty);
+      p.style.animationDuration = (18 + Math.random()*22)+'s';
+      particleRoot.appendChild(p);
+      io.observe(p);
+    }
+
+    // Footer year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
